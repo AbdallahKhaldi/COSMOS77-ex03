@@ -23,7 +23,6 @@ def test_sdk_uses_injected_deps():
     "method",
     [
         "run",
-        "smoke",
         "research",
         "write_chapters",
         "make_figures",
@@ -49,3 +48,17 @@ def test_sdk_default_construction():
     sdk = SDK()
     assert sdk.config.active_provider() == "gemini"
     assert isinstance(sdk.spec_sheet(), dict)
+
+
+def test_smoke_records_usage_and_returns_text(mocker):
+    fake_usage = {
+        "prompt_tokens": 5,
+        "completion_tokens": 2,
+        "total_tokens": 7,
+        "successful_requests": 1,
+    }
+    mocker.patch("cosmos77_ex03.crew.smoke.run_smoke", return_value=("pipeline-ok", fake_usage))
+    gk = Gatekeeper()
+    sdk = SDK(config=_FakeConfig(), gatekeeper=gk)
+    assert sdk.smoke() == "pipeline-ok"
+    assert gk.usage.total_tokens == 7
