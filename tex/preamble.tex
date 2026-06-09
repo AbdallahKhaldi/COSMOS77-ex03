@@ -1,0 +1,37 @@
+% !TEX program = lualatex
+% Verified stack: LuaLaTeX + babel(bidi=basic) + fontspec + biblatex/biber + hyperref.
+\documentclass[12pt,a4paper]{article}
+
+% --- BiDi + languages -------------------------------------------------------
+% bidi=basic uses LuaTeX's native Unicode bidi; layout=tabular fixes RTL tables.
+\usepackage[bidi=basic, layout=tabular, english, hebrew]{babel}
+\babelprovide[main, import]{english}   % English is the primary (LTR) language
+\babelprovide[import]{hebrew}          % Hebrew for the BiDi chapter
+
+% --- Fonts ------------------------------------------------------------------
+% FreeSerif ships with TeX Live and covers both Latin and Hebrew, so inline
+% English inside the Hebrew chapter renders correctly. If Hebrew shows empty
+% boxes on your TeX install, switch to a system Hebrew font, e.g.:
+%   \babelfont[hebrew]{rm}{Arial Hebrew}
+\babelfont{rm}{FreeSerif}
+
+% --- Math, tables, graphics, diagrams --------------------------------------
+\usepackage{amsmath, amssymb}            % fancy display formulas (B7)
+\usepackage{booktabs, tabularx}          % non-overflow tables (B6)
+\usepackage{graphicx}                    % \includegraphics (B5 Python figure)
+\usepackage{tikz}\usetikzlibrary{shapes.geometric, arrows.meta, positioning}  % B4
+
+% --- Headers / footers (B3) -------------------------------------------------
+\usepackage{fancyhdr}
+
+% --- Bibliography (B9) ------------------------------------------------------
+\usepackage[backend=biber, style=numeric, sorting=none]{biblatex}
+\addbibresource{refs.bib}
+
+% --- Links (load hyperref LAST; unicode=true for Hebrew metadata) -----------
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue,
+            unicode=true]{hyperref}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\nouppercase{\leftmark}}\fancyhead[R]{\thepage}
+\fancyfoot[C]{COSMOS77 — UOH-RL07 HW3}
