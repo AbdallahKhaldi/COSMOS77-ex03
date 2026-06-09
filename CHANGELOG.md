@@ -119,3 +119,11 @@ a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
   Spec Sheet (interpreted), extension points, testing, and the self-assessment (85).
 - `assets/*.png` PDF screenshots (PyMuPDF); `output/spec_sheet.json` committed
   (1.3M tokens / 174 requests / $0); `SDK.write_spec_sheet()` persists it. 96 tests.
+
+### Phase 11 — Final QA gauntlet
+- `docs/ACCEPTANCE.md` — B1–B15 (all ✅) + the 17 rules mapped to file/test/page.
+- All gates green (ruff, format, line-cap, pytest 97.55%, `uv lock --check`);
+  deterministic `assemble→build→qa` reproduces the 25-page PDF (all critical pass).
+- **Security:** sanitized a scrub-test fixture that contained a 34-char prefix of
+  the real free key; `.env` untracked, no key material in tracked files.
+- 60 commits, both authors (33/27), 0 wip/tmp, CLAUDE.md unchanged since Phase 0.
