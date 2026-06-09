@@ -67,3 +67,20 @@ a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
 - `crew/research_run.py` + `SDK.research()` + `cosmos77-article research` — persist
   `output/{research.md,outline.json,citations.json,outline.md}`.
 - Verified live: 12 chapters, 1 BiDi, 9 citations, ~44k tokens, $0. 70 tests, 99% cov.
+
+### Phase 6 — Parallel chapter writing
+- `crew/tasks_write.py` + `crew/write_run.py` + `SDK.write_chapters()` +
+  `cosmos77-article write` — one writer per chapter (Hebrew BiDi chapter → the
+  `bidi_writer`); editor stitches `output/article.md` (deterministic fallback).
+- **Free-tier fix (config-only, B12):** `gemini-2.5-flash` free tier is 5 RPM /
+  20 RPD — too small. Swapped to `gemini-2.5-flash-lite` in `providers.json`; set
+  `parallel_writers=false` + `max_rpm=10` in `setup.json` (sequential beats
+  parallel bursts on a rate-capped tier). The async path stays, config-toggleable.
+- Verified live: 12 chapters written (Hebrew chapter 8 in Hebrew). 75 tests, 99% cov.
+
+### Phase 7 — Figures, table, formula, Python graph
+- `figures/charts.py` — deterministic matplotlib `adoption.pdf` (the B5 graph) and
+  `frameworks.pdf`; `SDK.make_figures()` + `cosmos77-article figures`.
+- `tex/diagram.tex` (TikZ architecture, B4), `tex/table.tex` (tabularx/booktabs,
+  B6), `tex/formula.tex` (fancy amsmath TCO equation, B7).
+- 80 tests at 99% coverage (PDF validity + LaTeX-snippet content checks).
