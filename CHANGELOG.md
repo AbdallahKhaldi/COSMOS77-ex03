@@ -28,3 +28,13 @@ a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
   end-to-end run sequence diagram, ADR-001..ADR-007, and a risk register.
 - `docs/TODO.md` — 651 granular `T-NNNN | phase | area | description | DoD |
   status` items spanning P0–P12.
+
+### Phase 2 — Shared infrastructure + provider factory
+- `shared/version.py`, `shared/config.py` (dot-path JSON + `.env` loader),
+  `shared/logging_setup.py`, and `shared/gatekeeper.py` repurposed as a
+  token-usage / cost meter feeding the Spec Sheet (no hard cap; B12).
+- `providers/factory.py` + `providers/registry.py` — the config-driven LLM
+  factory (`build_llm`); Gemini default, Groq/OpenAI swappable, model never
+  hardcoded; clear error when the key env var is missing.
+- `sdk/sdk.py` — the single-entry `SDK` facade with pipeline stubs.
+- 51 unit tests (`crewai.LLM` + `os.environ` mocked) at 100% module coverage.
