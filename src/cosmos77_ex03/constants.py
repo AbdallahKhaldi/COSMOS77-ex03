@@ -1,7 +1,8 @@
-"""Project-wide constants.
+"""Project-wide structural constants (not tunable config — see CLAUDE.md rule 4).
 
-Expanded with crew role / chapter-status constants in Phase 2; kept tiny and
-side-effect-free so importing it is the only thing tests need to exercise it.
+These are fixed enumerations the crew, tasks, and SDK share. Tunable values
+(topic, language, model, provider, chapter count, paths) live in ``config/*.json``
+and are read via the Config loader.
 """
 
 from __future__ import annotations
@@ -14,3 +15,17 @@ PACKAGE_NAME: str = "cosmos77_ex03"
 
 #: The version string — kept in lockstep with pyproject and every config file.
 PROJECT_VERSION: str = "1.00"
+
+#: The fixed CrewAI agent roles (one ``Agent`` builder per role; writers fan out).
+AGENT_ROLES: tuple[str, ...] = (
+    "researcher",
+    "planner",
+    "chapter_writer",
+    "figure_agent",
+    "bidi_writer",
+    "editor",
+    "latex_author",
+)
+
+#: The lifecycle a chapter passes through, in order.
+CHAPTER_STATUSES: tuple[str, ...] = ("pending", "drafting", "written", "edited", "typeset")
