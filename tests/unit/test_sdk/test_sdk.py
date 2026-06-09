@@ -1,8 +1,6 @@
-"""Tests for the SDK skeleton (injected deps, NotImplementedError stubs)."""
+"""Tests for the SDK facade (injected deps + per-stage delegation)."""
 
 from __future__ import annotations
-
-import pytest
 
 from cosmos77_ex03.sdk.sdk import SDK
 from cosmos77_ex03.shared.gatekeeper import Gatekeeper
@@ -13,34 +11,24 @@ class _FakeConfig:
         return "gemini"
 
     def paths(self) -> dict:
-        return {"figures_dir": "tex/figures"}
+        return {"figures_dir": "tex/figures", "tex_dir": "tex"}
+
+    def get(self, key, default=None):
+        return default
+
+
+def _sdk() -> SDK:
+    return SDK(config=_FakeConfig(), gatekeeper=Gatekeeper())
 
 
 def test_sdk_uses_injected_deps():
     gk = Gatekeeper()
-    sdk = SDK(config=_FakeConfig(), gatekeeper=gk)
-    assert sdk.gatekeeper is gk
-
-
-@pytest.mark.parametrize(
-    "method",
-    [
-        "run",
-        "build_pdf",
-        "qa_pdf",
-    ],
-)
-def test_stubs_raise_not_implemented(method):
-    sdk = SDK(config=_FakeConfig(), gatekeeper=Gatekeeper())
-    with pytest.raises(NotImplementedError):
-        getattr(sdk, method)()
+    assert SDK(config=_FakeConfig(), gatekeeper=gk).gatekeeper is gk
 
 
 def test_spec_sheet_returns_dict():
-    sdk = SDK(config=_FakeConfig(), gatekeeper=Gatekeeper())
-    sheet = sdk.spec_sheet()
-    assert isinstance(sheet, dict)
-    assert sheet["provider"] == "gemini"
+    sheet = _sdk().spec_sheet()
+    assert isinstance(sheet, dict) and sheet["provider"] == "gemini"
 
 
 def test_sdk_default_construction():
@@ -50,13 +38,13 @@ def test_sdk_default_construction():
 
 
 def test_smoke_records_usage_and_returns_text(mocker):
-    fake_usage = {
+    usage = {
         "prompt_tokens": 5,
         "completion_tokens": 2,
         "total_tokens": 7,
         "successful_requests": 1,
     }
-    mocker.patch("cosmos77_ex03.crew.smoke.run_smoke", return_value=("pipeline-ok", fake_usage))
+    mocker.patch("cosmos77_ex03.crew.smoke.run_smoke", return_value=("pipeline-ok", usage))
     gk = Gatekeeper()
     sdk = SDK(config=_FakeConfig(), gatekeeper=gk)
     assert sdk.smoke() == "pipeline-ok"
@@ -66,8 +54,7 @@ def test_smoke_records_usage_and_returns_text(mocker):
 def test_build_agents_delegates(mocker):
     fake = {"researcher": object()}
     mocker.patch("cosmos77_ex03.crew.agents.build_agents", return_value=fake)
-    sdk = SDK(config=_FakeConfig(), gatekeeper=Gatekeeper())
-    assert sdk.build_agents() is fake
+    assert _sdk().build_agents() is fake
 
 
 def test_research_delegates_and_records(mocker):
@@ -75,8 +62,7 @@ def test_research_delegates_and_records(mocker):
 
     outline = Outline(chapters=[Chapter(index=1, title="A")])
     mocker.patch(
-        "cosmos77_ex03.crew.research_run.run_research",
-        return_value=(outline, {"total_tokens": 9}),
+        "cosmos77_ex03.crew.research_run.run_research", return_value=(outline, {"total_tokens": 9})
     )
     gk = Gatekeeper()
     sdk = SDK(config=_FakeConfig(), gatekeeper=gk)
@@ -93,15 +79,36 @@ def test_write_chapters_delegates_and_records(mocker):
 
 
 def test_make_figures_delegates(mocker):
-    mocker.patch(
-        "cosmos77_ex03.figures.charts.generate_all",
-        return_value=["tex/figures/adoption.pdf", "tex/figures/frameworks.pdf"],
-    )
-    sdk = SDK(config=_FakeConfig(), gatekeeper=Gatekeeper())
-    assert sdk.make_figures() == ["tex/figures/adoption.pdf", "tex/figures/frameworks.pdf"]
+    mocker.patch("cosmos77_ex03.figures.charts.generate_all", return_value=["a.pdf", "b.pdf"])
+    assert _sdk().make_figures() == ["a.pdf", "b.pdf"]
 
 
 def test_assemble_latex_delegates(mocker):
     mocker.patch("cosmos77_ex03.latex.assemble.assemble", return_value={"sections": 12})
-    sdk = SDK(config=_FakeConfig(), gatekeeper=Gatekeeper())
-    assert sdk.assemble_latex() == {"sections": 12}
+    assert _sdk().assemble_latex() == {"sections": 12}
+
+
+def test_build_pdf_delegates(mocker):
+    run = mocker.patch("subprocess.run")
+    result = _sdk().build_pdf()
+    run.assert_called_once()
+    assert result.endswith("main.pdf")
+
+
+def test_qa_pdf_returns_report(mocker):
+    from cosmos77_ex03.latex.qa import Check
+
+    mocker.patch("cosmos77_ex03.latex.qa.run_checks", return_value=[Check("x", True, True, "")])
+    result = _sdk().qa_pdf()
+    assert result["ok"] is True and "x" in result["report"]
+
+
+def test_run_chains_pipeline(mocker):
+    sdk = _sdk()
+    calls: list[str] = []
+    for name in ("research", "write_chapters", "make_figures", "assemble_latex", "build_pdf"):
+        mocker.patch.object(sdk, name, side_effect=lambda n=name: calls.append(n))
+    mocker.patch.object(sdk, "qa_pdf", return_value={"ok": True, "report": "R"})
+    result = sdk.run()
+    assert calls == ["research", "write_chapters", "make_figures", "assemble_latex", "build_pdf"]
+    assert result == {"ok": True, "report": "R"}
