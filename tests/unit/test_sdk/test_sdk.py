@@ -26,7 +26,6 @@ def test_sdk_uses_injected_deps():
     "method",
     [
         "run",
-        "assemble_latex",
         "build_pdf",
         "qa_pdf",
     ],
@@ -100,3 +99,9 @@ def test_make_figures_delegates(mocker):
     )
     sdk = SDK(config=_FakeConfig(), gatekeeper=Gatekeeper())
     assert sdk.make_figures() == ["tex/figures/adoption.pdf", "tex/figures/frameworks.pdf"]
+
+
+def test_assemble_latex_delegates(mocker):
+    mocker.patch("cosmos77_ex03.latex.assemble.assemble", return_value={"sections": 12})
+    sdk = SDK(config=_FakeConfig(), gatekeeper=Gatekeeper())
+    assert sdk.assemble_latex() == {"sections": 12}
