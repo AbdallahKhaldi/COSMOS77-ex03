@@ -1,0 +1,24 @@
+{
+  "version": "1.00",
+  "article": {
+    "title": "AI Agents in Production: Architecture, Orchestration & Governance in 2026",
+    "language_primary": "english",
+    "bidi_chapter": true,
+    "target_pages": 15,
+    "author": "Abdallah Khaldi and Tasneem Natour",
+    "course": "UOH-RL07 — Vibe Coding & AI Agents",
+    "instructor": "Dr. Yoram Segal"
+  },
+  "crew": {
+    "process": "sequential",
+    "parallel_writers": true,
+    "num_chapters": 12,
+    "require_citation_per_chapter": true,
+    "max_rpm": 10
+  },
+  "paths": {
+    "output_dir": "output",
+    "tex_dir": "tex",
+    "figures_dir": "tex/figures"
+  }
+}

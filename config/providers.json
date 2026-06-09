@@ -1,0 +1,18 @@
+{
+  "version": "1.00",
+  "active": "gemini",
+  "providers": {
+    "gemini": {
+      "model": "gemini/gemini-2.5-flash",
+      "api_key_env": "GEMINI_API_KEY"
+    },
+    "groq": {
+      "model": "groq/llama-3.3-70b-versatile",
+      "api_key_env": "GROQ_API_KEY"
+    },
+    "openai": {
+      "model": "gpt-4o",
+      "api_key_env": "OPENAI_API_KEY"
+    }
+  }
+}
