@@ -12,6 +12,9 @@ class _FakeConfig:
     def active_provider(self) -> str:
         return "gemini"
 
+    def paths(self) -> dict:
+        return {"figures_dir": "tex/figures"}
+
 
 def test_sdk_uses_injected_deps():
     gk = Gatekeeper()
@@ -23,8 +26,6 @@ def test_sdk_uses_injected_deps():
     "method",
     [
         "run",
-        "write_chapters",
-        "make_figures",
         "assemble_latex",
         "build_pdf",
         "qa_pdf",
@@ -82,3 +83,20 @@ def test_research_delegates_and_records(mocker):
     sdk = SDK(config=_FakeConfig(), gatekeeper=gk)
     assert sdk.research() is outline
     assert gk.usage.total_tokens == 9
+
+
+def test_write_chapters_delegates_and_records(mocker):
+    mocker.patch("cosmos77_ex03.crew.write_run.run_write", return_value=(12, {"total_tokens": 12}))
+    gk = Gatekeeper()
+    sdk = SDK(config=_FakeConfig(), gatekeeper=gk)
+    assert sdk.write_chapters() == 12
+    assert gk.usage.total_tokens == 12
+
+
+def test_make_figures_delegates(mocker):
+    mocker.patch(
+        "cosmos77_ex03.figures.charts.generate_all",
+        return_value=["tex/figures/adoption.pdf", "tex/figures/frameworks.pdf"],
+    )
+    sdk = SDK(config=_FakeConfig(), gatekeeper=Gatekeeper())
+    assert sdk.make_figures() == ["tex/figures/adoption.pdf", "tex/figures/frameworks.pdf"]
