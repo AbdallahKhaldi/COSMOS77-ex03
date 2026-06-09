@@ -32,9 +32,26 @@
 95 unit tests at 97% coverage (QA validated against passing and failing fixture
 projects; CrewAI / lualatex never invoked in the suite — rule 6).
 
-## The compile + eyeball (gated on the local MacTeX install)
+## The compile + eyeball (DONE — native MacTeX 2026)
 
-`lualatex`/`biber` come from the user's MacTeX install. The compile + the §13.1
-QA + the manual page-by-page eyeball (cover, TOC links, BiDi RTL, table fit,
-fancy formulas, the Python figure, clickable citations) complete this phase and
-produce the committed `tex/main.pdf`. (Recorded here once the compile is green.)
+Compiled with native LuaLaTeX (LuaHBTeX 1.24.0, TeX Live 2026) + biber 2.21 via
+the 4-pass pipeline → **`tex/main.pdf`, 25 pages, 218 KB**. Two real issues were
+found and fixed during the gate:
+
+1. **"Text line contains an invalid character"** — a stray control byte (`^^H`)
+   in an LLM-produced citation title leaked into `refs.bib`. Fixed by stripping
+   control characters in `latex/bib.py` (and defensively in `latex/convert.py`).
+2. **Overfull \hbox (13)** — added `microtype` + `\emergencystretch` to the
+   preamble; down to 2 cosmetic warnings (the table itself never overflows —
+   `tabularx`).
+
+A QA false-negative was also fixed: `latex/qa.py` now reads the `\input`-ed
+`formula.tex`/`table.tex`/`diagram.tex`, so B7 is detected correctly.
+
+Final state: `scripts/qa_pdf.py` → **ALL CRITICAL CHECKS PASS** (0 fatal errors,
+0 undefined citations). **Manual eyeball (every page) confirms B1–B9 + B15:**
+cover correct; TOC links jump; running headers/footers; the TikZ diagram + both
+matplotlib figures render; the framework table fits; the TCO formula is a
+typeset display equation (1); **the Hebrew chapter (ch. 8) reads right-to-left
+with English technical terms inline and correct glyphs**; the bibliography lists
+13 resolved, clickable references. `tex/main.pdf` is committed (B11).

@@ -104,3 +104,10 @@ a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
   clickable refs); critical failures gate the build.
 - `SDK.build_pdf()`, `SDK.qa_pdf()`, and `SDK.run()` (full pipeline) + the
   `build` / `qa` / `run` CLI commands. 95 tests, 97% coverage.
+- **Compiled `tex/main.pdf`** (native LuaLaTeX 2026 + biber, 25 pages): all §13.1
+  critical checks pass, eyeballed page-by-page (cover, TOC links, headers, TikZ
+  diagram, 2 matplotlib figures, fitting table, TCO display formula, the RTL
+  Hebrew chapter with inline English, 13 clickable resolved references).
+- Fixes found at the gate: stripped a control char from an LLM citation title
+  (`bib.py`/`convert.py`); added `microtype`+`emergencystretch` (overfull 13→2);
+  `qa.py` now reads the `\input`-ed snippet files. B11 PDF committed.
