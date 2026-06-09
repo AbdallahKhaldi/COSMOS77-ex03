@@ -1,8 +1,8 @@
 """Command-line entry point for `cosmos77-article`.
 
-Phase 0 ships a minimal dispatcher; each subcommand (smoke, research, write,
-figures, assemble, build, qa, run) is wired to the SDK in its own phase. Until
-then, naming a not-yet-wired command prints guidance instead of crashing.
+A thin dispatcher over the SDK. Each subcommand (smoke, research, write, figures,
+assemble, build, qa, run) is wired to the SDK in its phase; until then it prints
+guidance instead of crashing.
 """
 
 from __future__ import annotations
@@ -10,16 +10,7 @@ from __future__ import annotations
 import argparse
 import sys
 
-_COMMANDS = (
-    "smoke",
-    "research",
-    "write",
-    "figures",
-    "assemble",
-    "build",
-    "qa",
-    "run",
-)
+_COMMANDS = ("smoke", "research", "write", "figures", "assemble", "build", "qa", "run")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -37,31 +28,31 @@ def main(argv: list[str] | None = None) -> int:
     """Parse arguments and dispatch. Returns a process exit code."""
     from cosmos77_ex03 import __version__
 
-    parser = build_parser()
-    args = parser.parse_args(argv)
+    args = build_parser().parse_args(argv)
     if args.version:
         print(f"cosmos77-article {__version__}")
         return 0
     if args.command is None:
-        parser.print_help()
+        build_parser().print_help()
         return 0
-    if args.command == "smoke":
-        return _cmd_smoke()
-    print(
-        f"`{args.command}` is not wired yet — it lands in its phase. "
-        "See ../CLAUDE_CODE_PLAYBOOK.md for the build order."
-    )
-    return 0
+    return _dispatch(args.command)
 
 
-def _cmd_smoke() -> int:
-    """Run the live Gemini smoke crew and print the reply + token usage."""
+def _dispatch(command: str) -> int:
+    """Run one pipeline stage via the SDK and print a short summary."""
     from cosmos77_ex03.sdk.sdk import SDK
 
     sdk = SDK()
-    reply = sdk.smoke()
-    print(f"reply: {reply}")
-    print(f"token_usage: {sdk.gatekeeper.spec_sheet(provider=sdk.config.active_provider())}")
+    if command == "smoke":
+        print(f"reply: {sdk.smoke()}")
+        print(f"token_usage: {sdk.spec_sheet()}")
+        return 0
+    if command == "research":
+        outline = sdk.research()
+        print(f"research: {len(outline.chapters)} chapters, {len(outline.citations)} citations")
+        print(f"token_usage: {sdk.spec_sheet()}")
+        return 0
+    print(f"`{command}` is not wired yet — it lands in its phase.")
     return 0
 
 

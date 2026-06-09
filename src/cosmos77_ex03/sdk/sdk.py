@@ -33,8 +33,12 @@ class SDK:
         return text
 
     def research(self) -> Any:
-        """Run the research + outline tasks (Phase 5)."""
-        raise NotImplementedError("SDK.research lands in Phase 5")
+        """Run the research + outline tasks; persist artifacts; record usage."""
+        from cosmos77_ex03.crew.research_run import run_research
+
+        outline, usage = run_research(self.config)
+        self.gatekeeper.record(usage)
+        return outline
 
     def write_chapters(self) -> Any:
         """Run the parallel chapter writers + editor (Phase 6)."""
