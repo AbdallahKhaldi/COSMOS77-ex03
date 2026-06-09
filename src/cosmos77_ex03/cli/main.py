@@ -52,6 +52,15 @@ def _dispatch(command: str) -> int:
         print(f"research: {len(outline.chapters)} chapters, {len(outline.citations)} citations")
         print(f"token_usage: {sdk.spec_sheet()}")
         return 0
+    if command == "write":
+        count = sdk.write_chapters()
+        print(f"write: {count} chapters; article.md stitched")
+        print(f"token_usage: {sdk.spec_sheet()}")
+        return 0
+    if command == "figures":
+        paths = sdk.make_figures()
+        print(f"figures: {len(paths)} written -> {paths}")
+        return 0
     print(f"`{command}` is not wired yet — it lands in its phase.")
     return 0
 

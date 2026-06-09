@@ -41,12 +41,18 @@ class SDK:
         return outline
 
     def write_chapters(self) -> Any:
-        """Run the parallel chapter writers + editor (Phase 6)."""
-        raise NotImplementedError("SDK.write_chapters lands in Phase 6")
+        """Write all chapters in parallel + stitch the article; record usage."""
+        from cosmos77_ex03.crew.write_run import run_write
 
-    def make_figures(self) -> Any:
-        """Generate the matplotlib figures + TikZ diagram (Phase 7)."""
-        raise NotImplementedError("SDK.make_figures lands in Phase 7")
+        count, usage = run_write(self.config)
+        self.gatekeeper.record(usage)
+        return count
+
+    def make_figures(self) -> list[str]:
+        """Generate the matplotlib figures into the configured figures dir."""
+        from cosmos77_ex03.figures.charts import generate_all
+
+        return generate_all(self.config.paths().get("figures_dir", "tex/figures"))
 
     def assemble_latex(self) -> Any:
         """Assemble the tex/ project from chapters + figures (Phase 8)."""
