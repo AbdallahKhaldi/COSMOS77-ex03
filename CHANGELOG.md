@@ -6,6 +6,14 @@ a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
 
 ## [1.00] — 2026-06-09
 
+### Correction — course name (verified against the syllabus)
+- The title page/footer/docs said `UOH-RL07 — Vibe Coding & AI Agents`, copied
+  from the build playbook. The official syllabus (Dr. Yoram Segal) confirms the
+  course is **"Orchestration of AI Agents" (203.3763)** — "vibe coding" is a
+  *learning outcome*, not the title. Corrected repo-wide (PDF title page, footer,
+  README, CLAUDE.md, configs, docs); method usages of "vibe-coded" kept.
+
+
 ### Phase 12 — Cover PDF + tag + release
 - Generated `COSMOS77-ex03.pdf` (exercise 3, self-score 85, ex03 URL) from the
   lecturer's template via `scripts/generate_cover_pdf.py`; layout untouched.
