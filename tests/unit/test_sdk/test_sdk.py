@@ -62,3 +62,10 @@ def test_smoke_records_usage_and_returns_text(mocker):
     sdk = SDK(config=_FakeConfig(), gatekeeper=gk)
     assert sdk.smoke() == "pipeline-ok"
     assert gk.usage.total_tokens == 7
+
+
+def test_build_agents_delegates(mocker):
+    fake = {"researcher": object()}
+    mocker.patch("cosmos77_ex03.crew.agents.build_agents", return_value=fake)
+    sdk = SDK(config=_FakeConfig(), gatekeeper=Gatekeeper())
+    assert sdk.build_agents() is fake
