@@ -1,0 +1,21 @@
+% Four-layer production-agent reference architecture (B4 — vector image via TikZ).
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=6mm, >=Latex,
+  layer/.style={draw, rounded corners, minimum width=9cm, minimum height=1cm,
+                align=center, fill=blue!8},
+]
+  \node[layer] (plan) {\textbf{Planning \& Reasoning} — goal decomposition, tool selection};
+  \node[layer, below=of plan] (mem) {\textbf{Memory} — short-term context + long-term retrieval (RAG)};
+  \node[layer, below=of mem] (tools) {\textbf{Tools \& Actions} — APIs, code execution, MCP / A2A};
+  \node[layer, below=of tools] (obs) {\textbf{Observability \& Governance} — tracing, evals, guardrails};
+  \draw[->] (plan) -- (mem);
+  \draw[->] (mem) -- (tools);
+  \draw[->] (tools) -- (obs);
+  \draw[->] (obs.east) .. controls +(2.2,0) and +(2.2,0) .. (plan.east)
+        node[midway, right, align=left] {feedback\\loop};
+\end{tikzpicture}
+\caption{The four-layer reference architecture of a production AI agent.}
+\label{fig:arch}
+\end{figure}

@@ -1,0 +1,18 @@
+% Agent-framework comparison (B6 — tabularx X column + booktabs; never overflows).
+\begin{table}[htbp]
+\centering
+\caption{Agent framework production-fit, 2026.}
+\label{tab:frameworks}
+\begin{tabularx}{\linewidth}{l X r}
+\toprule
+Framework & Best-fit use case & Prod.\ fit \\
+\midrule
+LangGraph  & Stateful, cyclic multi-step orchestration   & High   \\
+CrewAI     & Role-based agent teams and sequential crews & High   \\
+AutoGen    & Conversational multi-agent prototyping      & Medium \\
+LlamaIndex & Retrieval-heavy (RAG) document agents       & Medium \\
+PydanticAI & Type-safe, validated structured outputs     & High   \\
+DSPy       & Prompt/program optimization and compilation & Medium \\
+\bottomrule
+\end{tabularx}
+\end{table}

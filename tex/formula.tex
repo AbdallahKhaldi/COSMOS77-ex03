@@ -1,0 +1,8 @@
+% Total Cost of Ownership model (B7 — fancy amsmath display equation, not flat text).
+\begin{equation}
+\label{eq:tco}
+\mathrm{TCO}_{\text{agent}}
+= \underbrace{\sum_{i=1}^{N}\!\big( t^{\text{in}}_{i}\,c_{\text{in}} + t^{\text{out}}_{i}\,c_{\text{out}} \big)}_{\text{LLM token usage}}
+\;+\; \underbrace{R\,\tau}_{\text{runtime}}
+\;+\; \underbrace{G + O}_{\text{governance \& ops}}
+\end{equation}
