@@ -23,6 +23,7 @@ article: **"AI Agents in Production: Architecture, Orchestration & Governance in
 uv sync
 cp .env.example .env          # then put your free GEMINI_API_KEY in .env
 uv run cosmos77-article --help
+uv run cosmos77-article smoke   # one-agent Gemini call → prints "pipeline-ok" + token usage
 ```
 
 The full pipeline (`research → write → figures → assemble → build → qa`) and its
