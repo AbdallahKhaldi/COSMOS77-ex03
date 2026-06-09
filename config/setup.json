@@ -11,7 +11,7 @@
   },
   "crew": {
     "process": "sequential",
-    "parallel_writers": true,
+    "parallel_writers": false,
     "num_chapters": 12,
     "require_citation_per_chapter": true,
     "max_rpm": 10
