@@ -81,8 +81,8 @@ def test_spec_sheet_shape():
 
 def test_scrub_redacts_keys():
     out = Gatekeeper.scrub(
-        "leak AQ.Ab8RN6K7ZXd7obc7AJSgnKhjP7USaSk and AIzaSyABCDEFGHIJKLMNOPQRSTUVWX12345678 end"
+        "leak AQ.FakeTokenZZ9wQ2mTn8pLx4vBc1dRf6sGh and AIzaSyABCDEFGHIJKLMNOPQRSTUVWX12345678 end"
     )
-    assert "AQ.Ab8" not in out
+    assert "AQ.FakeToken" not in out
     assert "AIzaSy" not in out
     assert "[REDACTED]" in out
