@@ -19,6 +19,7 @@
   "paths": {
     "output_dir": "output",
     "tex_dir": "tex",
-    "figures_dir": "tex/figures"
+    "figures_dir": "tex/figures",
+    "reference_pdf": "../reference/Agent_Architecture_2026.pdf"
   }
 }

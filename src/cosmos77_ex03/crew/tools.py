@@ -10,11 +10,7 @@ Phase 5 (more robust than a RAG PDF tool). ``FileWriterTool`` writes artifacts.
 from __future__ import annotations
 
 import os
-from pathlib import Path
 from typing import Any
-
-#: The primary local source the researcher grounds on (injected as context).
-REFERENCE_PDF = Path(__file__).resolve().parents[3] / "reference" / "Agent_Architecture_2026.pdf"
 
 
 def has_serper() -> bool:
