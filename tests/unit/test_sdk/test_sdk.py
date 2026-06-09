@@ -23,7 +23,6 @@ def test_sdk_uses_injected_deps():
     "method",
     [
         "run",
-        "research",
         "write_chapters",
         "make_figures",
         "assemble_latex",
@@ -69,3 +68,17 @@ def test_build_agents_delegates(mocker):
     mocker.patch("cosmos77_ex03.crew.agents.build_agents", return_value=fake)
     sdk = SDK(config=_FakeConfig(), gatekeeper=Gatekeeper())
     assert sdk.build_agents() is fake
+
+
+def test_research_delegates_and_records(mocker):
+    from cosmos77_ex03.crew.schemas import Chapter, Outline
+
+    outline = Outline(chapters=[Chapter(index=1, title="A")])
+    mocker.patch(
+        "cosmos77_ex03.crew.research_run.run_research",
+        return_value=(outline, {"total_tokens": 9}),
+    )
+    gk = Gatekeeper()
+    sdk = SDK(config=_FakeConfig(), gatekeeper=gk)
+    assert sdk.research() is outline
+    assert gk.usage.total_tokens == 9
