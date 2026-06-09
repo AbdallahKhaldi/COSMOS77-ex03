@@ -1,0 +1,15 @@
+{
+  "provider": "gemini",
+  "model": "gemini/gemini-2.5-flash-lite",
+  "prompt_tokens": 959457,
+  "completion_tokens": 343101,
+  "total_tokens": 1302558,
+  "successful_requests": 174,
+  "estimated_cost_usd": 0.0,
+  "by_phase": {
+    "smoke": {"total_tokens": 93, "requests": 1},
+    "research": {"total_tokens": 43974, "requests": 4},
+    "write": {"total_tokens": 1258491, "requests": 169}
+  },
+  "notes": "Free Gemini tier => $0. Writers run sequentially (the prior gemini-2.5-flash free tier capped at 5 RPM / 20 RPD; swapped to flash-lite). The write phase dominates: 12 per-chapter writers + an editor consuming the full article as context + CrewAI agent reasoning loops drove the request count."
+}

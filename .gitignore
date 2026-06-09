@@ -46,6 +46,8 @@ logs/*.jsonl
 # Generated crew artifacts (markdown/json drafts) — keep the directory only
 output/*
 !output/.gitkeep
+# ...but DO commit the Spec Sheet (B12 deliverable, linked from the README)
+!output/spec_sheet.json
 
 # LaTeX build junk — but DO commit tex/ (the project), tex/main.pdf, and tex/figures/*.pdf
 *.aux
