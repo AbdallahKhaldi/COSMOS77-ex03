@@ -20,9 +20,14 @@ class SDK:
         self.config = config or Config()
         self.gatekeeper = gatekeeper or Gatekeeper()
 
-    def run(self, topic: str | None = None) -> Any:
-        """Run the full pipeline (research -> write -> figures -> assemble -> build -> qa)."""
-        raise NotImplementedError("SDK.run lands in Phase 9 (full pipeline wiring)")
+    def run(self, topic: str | None = None) -> dict[str, Any]:
+        """Full pipeline: research -> write -> figures -> assemble -> build -> qa."""
+        self.research()
+        self.write_chapters()
+        self.make_figures()
+        self.assemble_latex()
+        self.build_pdf()
+        return self.qa_pdf()
 
     def smoke(self) -> str:
         """Run the one-agent Gemini smoke crew, record usage, return the reply."""
@@ -60,13 +65,26 @@ class SDK:
 
         return assemble(self.config)
 
-    def build_pdf(self) -> Any:
-        """Compile tex/main.pdf via build_pdf.sh (Phase 9)."""
-        raise NotImplementedError("SDK.build_pdf lands in Phase 9")
+    def build_pdf(self) -> str:
+        """Compile tex/main.pdf via the 4-pass LuaLaTeX pipeline; return its path."""
+        import subprocess
+        from pathlib import Path
 
-    def qa_pdf(self) -> Any:
-        """Validate the PDF against the §13.1 checklist (Phase 9)."""
-        raise NotImplementedError("SDK.qa_pdf lands in Phase 9")
+        root = Path(__file__).resolve().parents[3]
+        tex_dir = root / self.config.paths().get("tex_dir", "tex")
+        subprocess.run(["bash", str(root / "scripts" / "build_pdf.sh"), str(tex_dir)], check=True)
+        return str(tex_dir / "main.pdf")
+
+    def qa_pdf(self) -> dict[str, Any]:
+        """Run the §13.1 PDF QA checklist; return ``{ok, report}``."""
+        from pathlib import Path
+
+        from cosmos77_ex03.latex.qa import format_report, has_critical_failure, run_checks
+
+        root = Path(__file__).resolve().parents[3]
+        tex_dir = root / self.config.paths().get("tex_dir", "tex")
+        checks = run_checks(tex_dir, target_pages=int(self.config.get("article.target_pages", 15)))
+        return {"ok": not has_critical_failure(checks), "report": format_report(checks)}
 
     def spec_sheet(self) -> dict[str, Any]:
         """Return the Spec Sheet from the gatekeeper (provider from config)."""

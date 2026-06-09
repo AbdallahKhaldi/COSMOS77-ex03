@@ -65,6 +65,13 @@ def _dispatch(command: str) -> int:
         summary = sdk.assemble_latex()
         print(f"assemble: {summary['sections']} sections; refs.bib + main.tex written")
         return 0
+    if command == "build":
+        print(f"build: {sdk.build_pdf()}")
+        return 0
+    if command in ("qa", "run"):
+        result = sdk.run() if command == "run" else sdk.qa_pdf()
+        print(result["report"])
+        return 0 if result["ok"] else 1
     print(f"`{command}` is not wired yet — it lands in its phase.")
     return 0
 
