@@ -45,10 +45,23 @@ def main(argv: list[str] | None = None) -> int:
     if args.command is None:
         parser.print_help()
         return 0
+    if args.command == "smoke":
+        return _cmd_smoke()
     print(
         f"`{args.command}` is not wired yet — it lands in its phase. "
         "See ../CLAUDE_CODE_PLAYBOOK.md for the build order."
     )
+    return 0
+
+
+def _cmd_smoke() -> int:
+    """Run the live Gemini smoke crew and print the reply + token usage."""
+    from cosmos77_ex03.sdk.sdk import SDK
+
+    sdk = SDK()
+    reply = sdk.smoke()
+    print(f"reply: {reply}")
+    print(f"token_usage: {sdk.gatekeeper.spec_sheet(provider=sdk.config.active_provider())}")
     return 0
 
 

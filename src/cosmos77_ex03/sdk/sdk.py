@@ -24,9 +24,13 @@ class SDK:
         """Run the full pipeline (research -> write -> figures -> assemble -> build -> qa)."""
         raise NotImplementedError("SDK.run lands in Phase 9 (full pipeline wiring)")
 
-    def smoke(self) -> Any:
-        """Run the one-agent Gemini smoke crew (Phase 3)."""
-        raise NotImplementedError("SDK.smoke lands in Phase 3")
+    def smoke(self) -> str:
+        """Run the one-agent Gemini smoke crew, record usage, return the reply."""
+        from cosmos77_ex03.crew.smoke import run_smoke
+
+        text, usage = run_smoke(self.config)
+        self.gatekeeper.record(usage)
+        return text
 
     def research(self) -> Any:
         """Run the research + outline tasks (Phase 5)."""
