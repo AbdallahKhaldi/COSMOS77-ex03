@@ -111,3 +111,11 @@ a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
 - Fixes found at the gate: stripped a control char from an LLM citation title
   (`bib.py`/`convert.py`); added `microtype`+`emergencystretch` (overfull 13→2);
   `qa.py` now reads the `\input`-ed snippet files. B11 PDF committed.
+
+### Phase 10 — README lab report + Spec Sheet
+- `README.md` (256 lines, 17 sections, 3 PDF screenshots + badges): abstract,
+  architecture + Mermaid run sequence, repo layout, quickstart, CLI usage, the
+  one-line provider swap (B12), crew + Skills, the B1–B9 → page-number map, the
+  Spec Sheet (interpreted), extension points, testing, and the self-assessment (85).
+- `assets/*.png` PDF screenshots (PyMuPDF); `output/spec_sheet.json` committed
+  (1.3M tokens / 174 requests / $0); `SDK.write_spec_sheet()` persists it. 96 tests.
