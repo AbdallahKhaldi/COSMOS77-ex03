@@ -95,3 +95,12 @@ a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
   compile (ADR-004); the LLM latex-author path remains available.
 - Verified: 12 sections + main.tex + refs.bib (13 entries); ch_08 BiDi-wrapped.
   92 tests, 97.8% coverage.
+
+### Phase 9 — Compile + PDF QA (the gate)
+- `scripts/build_pdf.sh` — `lualatex → biber → lualatex → lualatex` (native
+  LuaLaTeX default; optional `USE_DOCKER_LATEX=1`).
+- `latex/qa.py` + `scripts/qa_pdf.py` — the §13.1 checklist as structured checks
+  (pages, image, figure, table, formula, TOC, headers, Hebrew BiDi, `\cite`+`.bbl`,
+  clickable refs); critical failures gate the build.
+- `SDK.build_pdf()`, `SDK.qa_pdf()`, and `SDK.run()` (full pipeline) + the
+  `build` / `qa` / `run` CLI commands. 95 tests, 97% coverage.
