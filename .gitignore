@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Secrets — the free GEMINI_API_KEY lives in .env (never committed; CLAUDE.md rule 9)
+.env
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.cache/
+
+# Linters / formatters
+.ruff_cache/
+.mypy_cache/
+
+# OS / IDE / local tooling
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.claude/
+*.swp
+*.swo
+
+# Runtime logs (keep the directory, drop the rotating log files)
+logs/*.log
+logs/*.jsonl
+!logs/.gitkeep
+
+# Generated crew artifacts (markdown/json drafts) — keep the directory only
+output/*
+!output/.gitkeep
+
+# LaTeX build junk — but DO commit tex/ (the project), tex/main.pdf, and tex/figures/*.pdf
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.run.xml
+*.synctex.gz
+
+# Cover-sheet artifacts (the cover PDF is generated OUTSIDE the repo in Phase 12)
+*.filled.docx
+uoh-rl07-ex01.docx
+COSMOS77-ex03.pdf
+
+# uv cache (the lock file IS committed)
+.uv-cache/
