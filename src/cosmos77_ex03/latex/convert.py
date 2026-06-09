@@ -78,6 +78,7 @@ def _block_to_tex(block: str) -> str:
 
 def md_to_latex(markdown: str, *, hebrew: bool = False) -> str:
     """Convert chapter Markdown to a LaTeX fragment (Hebrew wrapped for BiDi)."""
+    markdown = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", "", markdown)
     text = _FENCE_RE.sub("", markdown).strip()
     blocks = re.split(r"\n\s*\n", text)
     body = "\n\n".join(b for b in (_block_to_tex(bl) for bl in blocks) if b)

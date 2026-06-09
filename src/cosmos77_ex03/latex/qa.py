@@ -36,15 +36,12 @@ def page_count(pdf_path: Path) -> int:
 
 
 def _read_tex(tex_dir: Path) -> str:
-    parts: list[str] = []
-    for name in ("preamble.tex", "main.tex"):
-        path = tex_dir / name
-        if path.exists():
-            parts.append(path.read_text(encoding="utf-8"))
+    # All root .tex (main, preamble, the \input-ed formula/table/diagram) + sections.
+    files = sorted(tex_dir.glob("*.tex"))
     sections = tex_dir / "sections"
     if sections.is_dir():
-        parts += [f.read_text(encoding="utf-8") for f in sorted(sections.glob("*.tex"))]
-    return "\n".join(parts)
+        files += sorted(sections.glob("*.tex"))
+    return "\n".join(f.read_text(encoding="utf-8") for f in files)
 
 
 def _hebrew_section(tex_dir: Path) -> tuple[bool, str]:

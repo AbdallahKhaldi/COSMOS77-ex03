@@ -13,7 +13,8 @@ _FIELD_SPECIALS = {"&": r"\&", "%": r"\%", "_": r"\_", "#": r"\#", "$": r"\$"}
 
 
 def _bib_escape(text: object) -> str:
-    return "".join(_FIELD_SPECIALS.get(ch, ch) for ch in str(text))
+    clean = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", "", str(text))
+    return "".join(_FIELD_SPECIALS.get(ch, ch) for ch in clean)
 
 
 def cited_keys(latex_sections: list[str]) -> set[str]:
