@@ -54,9 +54,11 @@ class SDK:
 
         return generate_all(self.config.paths().get("figures_dir", "tex/figures"))
 
-    def assemble_latex(self) -> Any:
-        """Assemble the tex/ project from chapters + figures (Phase 8)."""
-        raise NotImplementedError("SDK.assemble_latex lands in Phase 8")
+    def assemble_latex(self) -> dict[str, Any]:
+        """Assemble the tex/ project deterministically from chapters + citations."""
+        from cosmos77_ex03.latex.assemble import assemble
+
+        return assemble(self.config)
 
     def build_pdf(self) -> Any:
         """Compile tex/main.pdf via build_pdf.sh (Phase 9)."""

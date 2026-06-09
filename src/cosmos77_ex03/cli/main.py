@@ -61,6 +61,10 @@ def _dispatch(command: str) -> int:
         paths = sdk.make_figures()
         print(f"figures: {len(paths)} written -> {paths}")
         return 0
+    if command == "assemble":
+        summary = sdk.assemble_latex()
+        print(f"assemble: {summary['sections']} sections; refs.bib + main.tex written")
+        return 0
     print(f"`{command}` is not wired yet — it lands in its phase.")
     return 0
 
