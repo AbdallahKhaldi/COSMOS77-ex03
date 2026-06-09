@@ -31,6 +31,15 @@ def test_spec_sheet_returns_dict():
     assert isinstance(sheet, dict) and sheet["provider"] == "gemini"
 
 
+def test_write_spec_sheet(tmp_path):
+    import json
+    from pathlib import Path
+
+    out = _sdk().write_spec_sheet(str(tmp_path / "spec.json"))
+    data = json.loads(Path(out).read_text(encoding="utf-8"))
+    assert data["provider"] == "gemini" and "total_tokens" in data
+
+
 def test_sdk_default_construction():
     sdk = SDK()
     assert sdk.config.active_provider() == "gemini"

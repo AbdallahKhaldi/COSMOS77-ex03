@@ -90,6 +90,16 @@ class SDK:
         """Return the Spec Sheet from the gatekeeper (provider from config)."""
         return self.gatekeeper.spec_sheet(provider=self.config.active_provider())
 
+    def write_spec_sheet(self, path: str | None = None) -> str:
+        """Persist the Spec Sheet (B12) to output/spec_sheet.json; return its path."""
+        import json
+        from pathlib import Path
+
+        out = path or f"{self.config.paths().get('output_dir', 'output')}/spec_sheet.json"
+        Path(out).parent.mkdir(parents=True, exist_ok=True)
+        Path(out).write_text(json.dumps(self.spec_sheet(), indent=2), encoding="utf-8")
+        return out
+
     def build_agents(self) -> dict[str, Any]:
         """Build the crew's singleton agents from config (Phase 4)."""
         from cosmos77_ex03.crew.agents import build_agents
