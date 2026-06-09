@@ -58,3 +58,12 @@ a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
 - `crew/tools.py` — web-search tool selection (Serper or keyless scraper) +
   FileWriterTool; `SDK.build_agents()` returns the roster.
 - 64 unit tests at 100% coverage (`crewai.Agent` + `crewai_tools` mocked).
+
+### Phase 5 — Research + outline
+- `crew/schemas.py` — `Outline`/`Chapter`/`Citation` models; the outline task uses
+  `Task.output_pydantic` for validated, machine-readable JSON.
+- `crew/tasks_research.py` — PDF-grounded research task (pdfplumber, config-driven
+  path) + a structured outline task (exactly one Hebrew BiDi chapter).
+- `crew/research_run.py` + `SDK.research()` + `cosmos77-article research` — persist
+  `output/{research.md,outline.json,citations.json,outline.md}`.
+- Verified live: 12 chapters, 1 BiDi, 9 citations, ~44k tokens, $0. 70 tests, 99% cov.
