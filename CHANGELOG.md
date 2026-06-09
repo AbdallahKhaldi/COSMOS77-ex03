@@ -48,3 +48,13 @@ a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
   Gemini path requires it; surfaced by the first live call.
 - Verified live: `reply: pipeline-ok`, 148 tokens, est. cost $0 (free tier).
   Unit tests keep CrewAI fully mocked (no live calls in the suite).
+
+### Phase 4 — CrewAI agents + Skills
+- 3 CrewAI Skills under `skills/{researcher,technical-writer,latex-author}/SKILL.md`
+  (verified a real `Agent` loads each from disk; B13).
+- `crew/agents.py` — 7 agent factories (researcher, planner, per-chapter
+  chapter_writer, figure_agent, bidi_writer, editor, latex_author) with skills
+  wired by absolute path and `allow_delegation=False` (ADR-002; B10).
+- `crew/tools.py` — web-search tool selection (Serper or keyless scraper) +
+  FileWriterTool; `SDK.build_agents()` returns the roster.
+- 64 unit tests at 100% coverage (`crewai.Agent` + `crewai_tools` mocked).
