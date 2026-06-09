@@ -4,7 +4,14 @@ All notable changes to COSMOS77-ex03 are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); the project adheres to
 a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
 
-## [1.00] — in progress
+## [1.00] — 2026-06-09
+
+### Phase 12 — Cover PDF + tag + release
+- Generated `COSMOS77-ex03.pdf` (exercise 3, self-score 85, ex03 URL) from the
+  lecturer's template via `scripts/generate_cover_pdf.py`; layout untouched.
+- `tests/unit/test_scripts/test_cover.py` asserts the cover field values.
+- Tagged `v1.00` and cut a GitHub release. 98 tests, 97.55% coverage.
+
 
 ### Phase 0 — Repo bootstrap
 - Scaffolded the `src/cosmos77_ex03` package, `tests/`, `docs/`, `config/`,
