@@ -16,3 +16,15 @@ a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
   config), and `config/logging_config.json`.
 - Wired pre-commit hooks and the GitHub Actions CI pipeline (ruff, line-cap,
   pytest with an 85% coverage gate; live LLM/LaTeX tests excluded).
+
+### Phase 1 — Mandatory documentation
+- `docs/PRD.md` — the whole assignment: context, stakeholders, user stories,
+  15 functional requirements mapped to B1–B15, non-functional requirements,
+  KPIs, and out-of-scope.
+- 10 per-mechanism PRDs (`docs/PRD_*.md`): LLM provider factory, crew design,
+  Skills, research tooling, figure generation, LaTeX template, BiDi chapter,
+  PDF QA, Spec Sheet, and extension points.
+- `docs/PLAN.md` — C4 model (Context/Container/Component/Code Mermaid), an
+  end-to-end run sequence diagram, ADR-001..ADR-007, and a risk register.
+- `docs/TODO.md` — 651 granular `T-NNNN | phase | area | description | DoD |
+  status` items spanning P0–P12.
