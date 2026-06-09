@@ -84,3 +84,14 @@ a single `1.00` version line tagged at submission (CLAUDE.md rule 10).
 - `tex/diagram.tex` (TikZ architecture, B4), `tex/table.tex` (tabularx/booktabs,
   B6), `tex/formula.tex` (fancy amsmath TCO equation, B7).
 - 80 tests at 99% coverage (PDF validity + LaTeX-snippet content checks).
+
+### Phase 8 — LaTeX assembly (Markdown → tex/)
+- `tex/preamble.tex` — LuaLaTeX + babel(bidi=basic) + biblatex/biber + hyperref.
+- `latex/convert.py` (Markdown→LaTeX, `\cite`-preserving, Hebrew BiDi wrapping),
+  `latex/bib.py` (refs.bib with every cited key resolved), `latex/document.py`
+  (cover + TOC + interleaved visuals + bibliography), `latex/assemble.py`.
+- `crew/tasks_latex.py` (latex_author task, B13) + `SDK.assemble_latex()` +
+  `cosmos77-article assemble`. Deterministic assembly for a guaranteed clean
+  compile (ADR-004); the LLM latex-author path remains available.
+- Verified: 12 sections + main.tex + refs.bib (13 entries); ch_08 BiDi-wrapped.
+  92 tests, 97.8% coverage.
