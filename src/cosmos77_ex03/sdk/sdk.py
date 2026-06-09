@@ -59,3 +59,9 @@ class SDK:
     def spec_sheet(self) -> dict[str, Any]:
         """Return the Spec Sheet from the gatekeeper (provider from config)."""
         return self.gatekeeper.spec_sheet(provider=self.config.active_provider())
+
+    def build_agents(self) -> dict[str, Any]:
+        """Build the crew's singleton agents from config (Phase 4)."""
+        from cosmos77_ex03.crew.agents import build_agents
+
+        return build_agents(self.config)
