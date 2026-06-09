@@ -1,7 +1,7 @@
 [project]
 name = "cosmos77-ex03"
 version = "1.00"
-description = "UOH-RL07 HW3: a CrewAI multi-agent team that researches, writes, and compiles a ~15-page LaTeX article on AI Agents in Production (vibe-coded with Claude Code)."
+description = "203.3763 HW3: a CrewAI multi-agent team that researches, writes, and compiles a ~15-page LaTeX article on AI Agents in Production (vibe-coded with Claude Code)."
 readme = "README.md"
 requires-python = ">=3.11,<3.12"
 license = { text = "MIT" }

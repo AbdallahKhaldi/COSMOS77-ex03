@@ -5,7 +5,7 @@
 ![ruff](https://img.shields.io/badge/lint-ruff%20clean-blue)
 ![python](https://img.shields.io/badge/python-3.11-blue)
 
-**UOH-RL07 — Vibe Coding & AI Agents (Dr. Yoram Segal) · Homework 3**
+**Orchestration of AI Agents (203.3763) — Dr. Yoram Segal · Homework 3**
 
 A Python **CrewAI multi-agent team** that researches, writes, and compiles a
 ~15-page LaTeX article — **"AI Agents in Production: Architecture, Orchestration
@@ -19,7 +19,7 @@ compiled [`tex/main.pdf`](tex/main.pdf) is the graded deliverable.
 | Abdallah Khaldi | 212389712 | Abdallah Khaldi | עבדאללה חאלדי |
 | Tasneem Natour | 323118794 | Tasneem Natour | תסנים נאטור |
 
-Course: **UOH-RL07** · Lecturer: **Dr. Yoram Segal** · Date: **2026-06-09**
+Course: **Orchestration of AI Agents (203.3763)** · Lecturer: **Dr. Yoram Segal** · Date: **2026-06-09**
 
 ## 1. Abstract
 

@@ -9,7 +9,7 @@ def test_main_tex_structure():
     article = {
         "title": "AI & Agents",
         "author": "A and B",
-        "course": "UOH-RL07",
+        "course": "203.3763",
         "instructor": "Dr. Segal",
     }
     out = build_main_tex(article, [1, 2, 8, 12])

@@ -2,7 +2,7 @@
 
 This plan is the architecture-of-record for the HW3 deliverable: a CrewAI
 multi-agent program that researches, plans, writes, illustrates, edits, and
-renders a 15-page LaTeX article (`tex/main.pdf`) for UOH-RL07. It is binding
+renders a 15-page LaTeX article (`tex/main.pdf`) for 203.3763. It is binding
 alongside `CLAUDE.md` and the acceptance criteria B1–B15. The pipeline is a
 single arc: **CLI → SDK → ProviderFactory → CrewAI crew → LaTeX assembly →
 `build_pdf.sh` → `qa_pdf.py` → PDF.** Every section below ties back to that arc.

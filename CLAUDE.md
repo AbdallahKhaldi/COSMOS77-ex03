@@ -1,6 +1,7 @@
 # CLAUDE.md — Project rules of engagement (binding for every prompt)
 
-HW3 (CrewAI + LaTeX article generator) for Dr. Yoram Segal's UOH-RL07 course.
+HW3 (CrewAI + LaTeX article generator) for Dr. Yoram Segal's course
+"Orchestration of AI Agents" (203.3763).
 Every prompt inherits these rules. HW3 acceptance criteria (B1–B15) are in
 ../CLAUDE_CODE_PLAYBOOK.md §1.5 — also binding. The PDF is the heart of the grade.
 

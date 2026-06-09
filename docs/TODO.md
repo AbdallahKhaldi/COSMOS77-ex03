@@ -57,7 +57,7 @@ T-0048 | P0 | precommit | Wire ruff and ruff-format pre-commit hooks | .pre-comm
 T-0049 | P0 | precommit | Add a local pre-commit hook invoking the 150-line cap check | a repo:local hook id line-cap-150 runs scripts/check_line_cap.py | done
 T-0050 | P0 | docs | Author CLAUDE.md encoding the 17 project rules and design canon | CLAUDE.md exists at repo root and references the 150-line cap, uv-only, and provider-agnostic rules | done
 T-0051 | P0 | docs | Author README.md, CHANGELOG.md, CONTRIBUTING.md, and LICENSE at repo root | all four files exist and CHANGELOG records the 1.00 bootstrap entry | done
-T-0052 | P1 | docs | Write docs/PRD.md top matter with project id, course UOH-RL07 HW3, lecturer Dr. Yoram Segal, version 1.00, and the exact article title | docs/PRD.md exists and grep finds "AI Agents in Production", "UOH-RL07", "Yoram Segal", and "1.00" | todo
+T-0052 | P1 | docs | Write docs/PRD.md top matter with project id, course 203.3763 HW3, lecturer Dr. Yoram Segal, version 1.00, and the exact article title | docs/PRD.md exists and grep finds "AI Agents in Production", "203.3763", "Yoram Segal", and "1.00" | todo
 T-0053 | P1 | docs | Add a Goals and Non-Goals section to PRD.md listing the ~15-page PDF as the primary deliverable and excluding any GUI | grep -i "non-goal" docs/PRD.md returns a section and "CLI only" appears, no "GUI" feature listed | todo
 T-0054 | P1 | docs | Add a Personas/User-Stories section to PRD.md (student author, reviewer, grader) tied to acceptance IDs | docs/PRD.md contains "As a reviewer" and at least three persona stories each referencing a B-id | todo
 T-0055 | P1 | docs | Build the Functional Requirements table in PRD.md mapping FR-01..FR-15 to acceptance criteria B1..B15 | grep -c "FR-" docs/PRD.md >= 15 and each B1..B15 token is present | todo
@@ -520,7 +520,7 @@ T-0511 | P10 | spec | Add scripts/qa_spec_sheet.py validating output/spec_sheet.
 T-0512 | P10 | tests | Add tests/qa/test_spec_sheet_schema.py asserting all required keys and types in output/spec_sheet.json | pytest tests/qa/test_spec_sheet_schema.py passes against a fixture spec sheet | todo
 T-0513 | P10 | tests | Mock the gatekeeper snapshot so test_spec_sheet_generation runs without live LLM/CrewAI calls | test patches CostMeter.to_spec_sheet and asserts written JSON matches the mocked payload | todo
 T-0514 | P10 | docs | Replace the placeholder README.md with the full HW3 lab report exceeding 250 lines | `wc -l README.md` reports >= 250 lines | todo
-T-0515 | P10 | docs | Write a README title block stating topic, both author names, date, course UOH-RL07, and lecturer Dr. Yoram Segal | README.md header contains the topic string, both authors, the course code, and the lecturer name | todo
+T-0515 | P10 | docs | Write a README title block stating topic, both author names, date, course 203.3763, and lecturer Dr. Yoram Segal | README.md header contains the topic string, both authors, the course code, and the lecturer name | todo
 T-0516 | P10 | docs | Add a README project-overview section summarizing the CrewAI + LaTeX article generator goal | README.md has an Overview/Introduction section describing the multi-agent article pipeline | todo
 T-0517 | P10 | docs | Embed at least three images in README.md using Markdown image syntax | `grep -c '!\[' README.md` reports >= 3 image references | todo
 T-0518 | P10 | docs | Ensure every README image path resolves to a committed file under assets/ or output/figures/ | a link-check confirms each README image src file exists on disk | todo
@@ -612,7 +612,7 @@ T-0603 | P12 | config | Set cover.exercise_number to integer 3 in config/setup.j
 T-0604 | P12 | config | Set cover.self_score to integer 85 in config/setup.json | python assertion on cover.self_score==85 passes | todo
 T-0605 | P12 | config | Set cover.ex03_repo_url to the GitHub ex03 repository URL in config/setup.json | the URL string starts with https://github.com/ and is non-empty | todo
 T-0606 | P12 | config | Record cover.topic as "AI Agents in Production: Architecture, Orchestration & Governance in 2026" | config value equals the canonical article title exactly | todo
-T-0607 | P12 | config | Record cover.course "UOH-RL07" and cover.lecturer "Dr. Yoram Segal" in config/setup.json | both string fields present and non-empty | todo
+T-0607 | P12 | config | Record cover.course "203.3763" and cover.lecturer "Dr. Yoram Segal" in config/setup.json | both string fields present and non-empty | todo
 T-0608 | P12 | config | Record cover.author full name(s) of the student(s) in config/setup.json | cover.author present and non-empty string | todo
 T-0609 | P12 | config | Record cover.date field or a flag to auto-fill the build date for the cover | cover.date present (ISO string) or cover.auto_date boolean true | todo
 T-0610 | P12 | shared | Add a CoverConfig dataclass/loader in src/cosmos77_ex03/shared reading the cover block from config/setup.json | importing CoverConfig and loading returns populated typed fields | todo

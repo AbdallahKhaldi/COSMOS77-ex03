@@ -17,7 +17,7 @@ def build_parser() -> argparse.ArgumentParser:
     """Construct the top-level argument parser."""
     parser = argparse.ArgumentParser(
         prog="cosmos77-article",
-        description="CrewAI + LaTeX generator for the UOH-RL07 HW3 article.",
+        description="CrewAI + LaTeX generator for the 203.3763 HW3 article.",
     )
     parser.add_argument("command", nargs="?", choices=_COMMANDS, help="pipeline stage to run")
     parser.add_argument("--version", action="store_true", help="print the version and exit")

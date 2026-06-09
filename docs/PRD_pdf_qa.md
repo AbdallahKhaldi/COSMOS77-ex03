@@ -151,7 +151,7 @@ uv run python scripts/qa_pdf.py --json     # machine-readable only
 
 The validator prints this for the grader; these are **B15** judgments a script cannot make:
 
-- [ ] **Cover (B2)** shows topic, author, date, course (UOH-RL07), lecturer (Dr. Yoram Segal).
+- [ ] **Cover (B2)** shows topic, author, date, course (203.3763), lecturer (Dr. Yoram Segal).
 - [ ] **TOC links (B3/B9)** — clicking a TOC entry jumps to the right chapter.
 - [ ] **Hebrew RTL (B8)** — the Hebrew chapter reads right-to-left, punctuation correct,
       English islands inside it read left-to-right.

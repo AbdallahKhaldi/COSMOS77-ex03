@@ -68,7 +68,7 @@ from `config/setup.json -> article`:
 |-------------|-----------|---------------|
 | title | `article.title` | "AI Agents in Production: …" |
 | author | `article.author` | "Abdallah Khaldi and Tasneem Natour" |
-| course | `article.course` | "UOH-RL07 — Vibe Coding & AI Agents" |
+| course | `article.course` | "Orchestration of AI Agents (203.3763)" |
 | instructor | `article.instructor` | "Dr. Yoram Segal" |
 | date | `\today` | rendered at compile time |
 
@@ -110,7 +110,7 @@ order is load-bearing: `documentclass` first, `hyperref` last.
 \pagestyle{fancy}\fancyhf{}
 \fancyhead[L]{\nouppercase{\leftmark}}
 \fancyhead[R]{\thepage}
-\fancyfoot[C]{COSMOS77 — UOH-RL07 HW3}
+\fancyfoot[C]{COSMOS77 — 203.3763 HW3}
 \hypersetup{pdftitle={AI Agents in Production}, pdfauthor={COSMOS77}}
 ```
 

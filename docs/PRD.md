@@ -2,7 +2,7 @@
 
 ## 1. Context
 
-UOH-RL07 HW3 ("Article/Book Generation with CrewAI and LaTeX", Dr. Yoram Segal) asks
+203.3763 HW3 ("Article/Book Generation with CrewAI and LaTeX", Dr. Yoram Segal) asks
 us to operationalize the central thesis of Lecture 06: the gap between a Proof-of-Concept
 agent demo and a **production** multi-agent system. A PoC can prompt one LLM and paste the
 answer; production demands orchestration, deterministic execution, governance, cost

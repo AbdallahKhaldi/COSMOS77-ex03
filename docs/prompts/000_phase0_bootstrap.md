@@ -7,7 +7,7 @@
 ## Prompt issued
 
 > Senior software architect, deliver HW3 ("Article/Book Generation with CrewAI
-> and LaTeX") for UOH-RL07. Authority order: `../CLAUDE_CODE_PLAYBOOK.md` (§1 the
+> and LaTeX") for 203.3763. Authority order: `../CLAUDE_CODE_PLAYBOOK.md` (§1 the
 > 17 rules, §1.5 acceptance B1–B15, §16 the LuaLaTeX BiDi template). Phase 0
 > goal: repo skeleton, tooling, `CLAUDE.md`, git init + remote + first push — no
 > business logic. Reuse the proven tooling from `~/COSMOS77/HW1/COSMOS77-ex01/`
